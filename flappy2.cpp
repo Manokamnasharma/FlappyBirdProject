@@ -1,13 +1,11 @@
-
-# include < stdio.h > 
-#include < conio.h > 
-#include <graphics.h> 
-#include <dos.h>
+# include < stdio.h >
+#include < conio.h >
+#include < graphics.h >
+#include < dos.h >
 #include <stdlib.h>
-
     typedef struct diff {
-        int r;
-        struct diff * next;
+	int r;
+	struct diff * next;
     }
 diff;
 
@@ -17,7 +15,7 @@ typedef struct scor {
 }
 scor;
 
-void pop(struct scor * stack) {
+void pop(struct scor * stack)  {
     struct scor * temp;
     temp = stack;
     temp = temp -> next;
@@ -25,7 +23,7 @@ void pop(struct scor * stack) {
     free(temp);
 }
 
-void push(int score, struct scor * stack){
+void push(int score, struct scor * stack) {
     struct scor * temp;
     temp = (scor * ) malloc(sizeof(struct scor));
     temp -> sc = score;
@@ -35,8 +33,8 @@ void push(int score, struct scor * stack){
 }
 
 void main() {
-    int i, j; // coordinates 
-    int c = 0; // score  
+    int i, j; // coordinates
+    int c = 0; // score counter
     int f = 1; //  flap counter
     char ch = 'y';
     int t;
@@ -45,9 +43,9 @@ void main() {
     int color = 0;
     int colorpil = 0;
 
-    int h; //   height and depth parameters 
+    int h; /*   height and depth parameters */
     int l, k, m, r1, r2, r3;
-    int a1, a2, a3; // base slab coordinates 
+    int a1, a2, a3; /* base slab coordinates  */
     char msg[20];
     int score;
     int i1;
@@ -71,71 +69,72 @@ void main() {
 
     for (i1 = 0; i1 < 3; i1++) {
 
-        temp1 = (diff * ) malloc(sizeof(struct diff));
-        temp1 -> r = 0;
-        if (rd == NULL)
-            rd = temp1;
-        else {
-            temp1 -> next = rd;
-            rd = temp1;
-        }
+	temp1 = (diff * ) malloc(sizeof(struct diff));
+	temp1 -> r = 0;
+	if (rd == NULL)
+	    rd = temp1;
+	else {
+	    temp1 -> next = rd;
+	    rd = temp1;
+	}
     }
 
+    /*  GAME BEGINS   */
 
-    while (ch == 'y') // Repeat Game {
+    while (ch == 'y') /*   GAME  REPEAT   LOOOOOOP     */ {
 
-        f = 1;
-        c = 0;
-        r1 = 0, r2 = 0, r3 = 0;
-        h = 0;
+	f = 1;
+	c = 0;
+	r1 = 0, r2 = 0, r3 = 0;
+	h = 0;
 
-        ht = 23;
-        i = 605, j = 795, k = 985;
+	ht = 23;
+	i = 605, j = 795, k = 985;
 
-        a1 = 0, a2 = 640, a3 = 1280;
+	a1 = 0, a2 = 640, a3 = 1280;
 
-        while (r1 < 50)  {
-            r1 = rand() % 110;
-        }
+	while (r1 < 50) /*   1st   pillar   randomness  */ {
+	    r1 = rand() % 110;
+	}
 
-        m = rand() % 2;
+	m = rand() % 2;
 
-        if (m % 2 == 0)
-            r1 = 1 * r1;
-        else
-            r1 = -1 * r1;
+	if (m % 2 == 0)
+	    r1 = 1 * r1;
+	else
+	    r1 = -1 * r1;
 
-        while (r2 < 50) /*   2nd  pillar randomness  */ {
-            r2 = rand() % 110;
-        }
+	while (r2 < 50) /*   2nd  pillar randomness  */ {
+	    r2 = rand() % 110;
+	}
 
-        m = rand() % 2;
+	m = rand() % 2;
 
-        if (m % 2 == 0)
-            r2 = 1 * r2;
-        else
-            r2 = -1 * r2;
+	if (m % 2 == 0)
+	    r2 = 1 * r2;
+	else
+	    r2 = -1 * r2;
 
-        while (r3 < 50) /*  3rd  pillar  randomness   */ {
-            r3 = rand() % 110;
-        }
+	while (r3 < 50) /*  3rd  pillar  randomness   */ {
+	    r3 = rand() % 110;
+	}
 
-        m = rand() % 2;
+	m = rand() % 2;
 
-        if (m % 2 == 0)
-            r3 = 1 * r3;
-        else
-            r3 = -1 * r3;
+	if (m % 2 == 0)
+	    r3 = 1 * r3;
+	else
+	    r3 = -1 * r3;
 
-        color = 0;
-        color = rand() % 2; /*   background  and   pillar  color coding   */
-        color = color + 8;
+	color = 0;
+	color = rand() % 2; /*   background  and   pillar  color coding   */
+	color = color + 8;
 
-        if (color == 8) /*  if  background gray then pillar r green  */ /*   NIGHT */
-            colorpil = 2;
+	if (color == 8) /*  if  background gray then pillar r green  */ /*   NIGHT */
+	    colorpil = 2;
 
-        if (color == 9) /*  if  background is lightblue then pillars r  light green  */ /*   DAY   */
-            colorpil = 12;
+	if (color == 9) /*  if  background is lightblue then pillars r  light green  */ /*   DAY   */
+	    colorpil = 12;
 
         setbkcolor(color);
 
@@ -195,7 +194,7 @@ void main() {
             if (hgt >= 20)
                 h++;
 
-            ellipse(300, 210 + h, 0, 360, 25, 20); /*    body of bird  */
+            ellipse(300, 210 + h, 0, 360, 25, 20); /*    bird  structure   */
             arc(325, 185 + h, 190, 270, 25); /*    eye    */
             ellipse(325, 210 + h, 0, 360, 6, 4); /*   beak    */
             /* floodfill(300,240+h,4);  */
