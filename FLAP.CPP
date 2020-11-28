@@ -43,7 +43,7 @@ void main() {
     int ht = 23;
     int hgt = 0;
     int color = 0;
-    int colorpil = 0;
+    int colorpil = 4;
 
     int h; /*   height and depth parameters */
     int l, k, m, r1, r2, r3;
@@ -144,45 +144,27 @@ void main() {
 
 	for (l = 0;; l++) {
 
-	/*    if (color == 8) /*    for  stars   {
 
 		setfillstyle(SOLID_FILL, WHITE);
-		bar(40, 200, 42, 208);
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(37, 203, 45, 205);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(130, 120, 133, 123);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(134, 200, 135, 201);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(225, 160, 227, 165);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(320, 200, 322, 208);
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(317, 203, 325, 205);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(320, 120, 321, 121);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(415, 160, 418, 163);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(510, 120, 512, 125);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(510, 200, 511, 201);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(600, 160, 602, 168);
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(597, 163, 605, 165);
-
-	    } /*  end   of  stars   creation  */
+		circle(40, 250, 10);
+		circle(37, 203, 5);
+		circle(130, 120, 12);
+		circle(134, 200, 13);
+		circle(225, 160, 9);
+		circle(360, 200, 5);
+		circle(317, 150, 7);
+		circle(400, 120, 8);
+		circle(415, 160, 10);
+		circle(510, 120, 5);
+		circle(510, 200, 5);
+		circle(600, 160, 6);
+		circle(490, 470, 6);
+		circle(550, 420, 7);
+		circle(40, 400, 6);
+		circle(60, 450, 5);
+		circle(270, 455, 6);
+		circle(420, 400, 6);
+		circle(360, 448, 8);
 
 	    if (f > 18)
 		f = 1;
@@ -267,46 +249,19 @@ void main() {
 
 	for (l = 0;; l++) /*    the beginning of the game's loop  */ {
 
-	 /*   if (color == 8) /*    for  stars   {
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(40, 200, 42, 208);
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(37, 203, 45, 205);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(130, 120, 133, 123);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(134, 200, 135, 201);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(225, 160, 227, 165);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(320, 200, 322, 208);
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(317, 203, 325, 205);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(320, 120, 321, 121);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(415, 160, 418, 163);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(510, 120, 512, 125);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(510, 200, 511, 201);
-
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(600, 160, 602, 168);
-		setfillstyle(SOLID_FILL, WHITE);
-		bar(597, 163, 605, 165);
-
-	    } /*  end   of  stars   creation  */
-
+	 setfillstyle(SOLID_FILL, WHITE);
+		circle(40, 250, 10);
+		circle(37, 203, 5);
+		circle(130, 120, 12);
+		circle(134, 200, 13);
+		circle(225, 160, 9);
+		circle(360, 200, 5);
+		circle(317, 150, 7);
+		circle(400, 120, 8);
+		circle(415, 160, 10);
+		circle(510, 120, 5);
+		circle(510, 200, 5);
+		circle(600, 160, 6);
       /*	    if (a1 <= -639) /*   slash filled  slab  condition
 		a1 = 1280;
 
@@ -320,18 +275,18 @@ void main() {
 	    bar(0, 420, 640, 440);
 
 	    setfillstyle(SOLID_FILL, 10); /*  base  yellow  ground   */
-            bar(0, 440, 640, 480);
+	    bar(0, 440, 640, 480);
 
-            a1--;
-            a2--;
-            a3--;
+	    a1--;
+	    a2--;
+	    a3--;
 
-            if (f > 22)
-                f = 1;
+	    if (f > 22)
+		f = 1;
 
 	/*    ellipse(300, 240+h, 0, 360, 25, 20);    bird  structure
-            arc(325, 215 + h, 190, 270, 25);
-            ellipse(325, 240 + h, 0, 360, 6, 4);
+	    arc(325, 215 + h, 190, 270, 25);
+	    ellipse(325, 240 + h, 0, 360, 6, 4);
 	    /* floodfill(300,240+h,4);  */
 	    circle(325,210+h,3);
 	    arc(300, 230+h, 30, 150,40)   ;
@@ -344,182 +299,182 @@ void main() {
 	    setfillstyle(SOLID_FILL,GREEN);
 	    floodfill(325,210+h,WHITE);
 
-            if (f <= 11) {
+	    if (f <= 11) {
 
 	    /*	arc(300, 215 + h, 180, 270, 25);
-                arc(275, 240 + h, 0, 90, 25);
+		arc(275, 240 + h, 0, 90, 25);
 
-                 floodfill(287,227,WHITE);
+		 floodfill(287,227,WHITE);
 		floodfill(279,219,WHITE);	*/
 		line(300,210+h,298,203+h);
 		line(298,203+h,292,215+h);
 		line(292,215+h,300,210+h);
 
-            }
+	    }
 
-            if (f > 11) {
+	    if (f > 11) {
 	      /*  arc(300, 265 + h, 90, 180, 25);
-                arc(275, 240 + h, 270, 0, 25);
+		arc(275, 240 + h, 270, 0, 25);
 		  floodfill(287,252,WHITE);
 		floodfill(279,261,WHITE); */
 		line(300,210+h,287,202+h);
 		line(287,202+h,284,218+h);
 		line(284,218+h,300,210+h);
-            }
+	    }
 
-            f++;
+	    f++;
 
 	    if ((190 + h) <= 0) /*  roof collision  */ {
-                ht = 50;
-            }
+		ht = 50;
+	    }
 
 	    if ((230 + h) >= 420) /* floor collision*/ {
-                break;
-            }
+		break;
+	    }
 
 	    if ((i <= 334 && i >= 266) || ((i + 50) <= 334 && (i + 50) >= 266)) /* collision with 1st pillar top  or  base */ {
 		if ((190 + h) <= (180 + r1) || (230 + h) >= (180 + r1 + 115))
-                    break;
-            }
+		    break;
+	    }
 
 	    if ((j <= 334 && j >= 266) || ((j + 50) <= 334 && (j + 50) >= 266)) /* collision with 1st pillar top  or  base */ {
 		if ((190 + h) <= (180 + r2) || (230 + h) >= (180 + r2 + 115))
-                    break;
-            }
+		    break;
+	    }
 
 	    if ((k <= 334 && k >= 266) || ((k + 50) <= 334 && (k + 50) >= 266)) /* collision with 1st pillar top  or  base */ {
 		if ((190 + h) <= (180 + r3) || (230 + h) >= (180 + r3 + 115))
-                    break;
-            }
+		    break;
+	    }
 
-            /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++                   */
+	    /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++                   */
 
 	    if ((190 + h) <= (180 + r1) || (230 + h) >= (180 + r1 + 115)) /* collision with 1st pillar sides  */ {
-                if (i == 325)
-                    break;
-            }
+		if (i == 325)
+		    break;
+	    }
 
 	    if ((190 + h) <= (180 + r2) || (230 + h) >= (180 + r2 + 115)) /* collision with 2nd pillar sides */ {
-                if (j == 325)
-                    break;
-            }
+		if (j == 325)
+		    break;
+	    }
 
 	    if ((190 + h) <= (180 + r3) || (230 + h) >= (180 + r3 + 115)) /* collision with 3rd  pillar sides  */ {
-                if (k == 325)
-                    break;
-            }
+		if (k == 325)
+		    break;
+	    }
 
-            if (kbhit()) /*   keyboard hit */ {
-                getch();
-                ht = 0;
-            }
+	    if (kbhit()) /*   keyboard hit */ {
+		getch();
+		ht = 0;
+	    }
 
 	    if (ht < 23) /*  going  up  */ {
 
-                if (ht == 0)
-                    h = h - 3;
+		if (ht == 0)
+		    h = h - 3;
 
-                else
-                    h = h - 2;
+		else
+		    h = h - 2;
 
-            }
+	    }
 
-            if (ht >= 23) /*  falling down  */ {
-                h = h + 2;
+	    if (ht >= 23) /*  falling down  */ {
+		h = h + 2;
 
-            }
+	    }
 
-            ht++;
+	    ht++;
 
-            /* 1st pillar */
+	    /* 1st pillar */
 
 	    if (i < 555) {
 
-                setfillstyle(SOLID_FILL, colorpil);
-                bar(i, 0, i + 50, 180 + r1);
-                setfillstyle(SOLID_FILL, colorpil);
-                bar(i - 5, 170 + r1, i + 55, 180 + r1);
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(i, 0, i + 50, 180 + r1);
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(i - 5, 170 + r1, i + 55, 180 + r1);
 
-                rectangle(i, 0, i + 50, 170 + r1);
+		rectangle(i, 0, i + 50, 170 + r1);
 
-                rectangle(i - 5, 170 + r1, i + 55, 180 + r1);
+		rectangle(i - 5, 170 + r1, i + 55, 180 + r1);
 
-                setfillstyle(SOLID_FILL, colorpil);
-                bar(i, 180 + r1 + 115, i + 50, 419);
-                setfillstyle(SOLID_FILL, colorpil);
-                bar(i - 5, 180 + r1 + 115, i + 55, 190 + r1 + 115);
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(i, 180 + r1 + 115, i + 50, 419);
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(i - 5, 180 + r1 + 115, i + 55, 190 + r1 + 115);
 
-                rectangle(i - 5, 180 + r1 + 115, i + 55, 190 + r1 + 115);
+		rectangle(i - 5, 180 + r1 + 115, i + 55, 190 + r1 + 115);
 
-                rectangle(i, 190 + r1 + 115, i + 50, 419);
+		rectangle(i, 190 + r1 + 115, i + 50, 419);
 
-                i--;
+		i--;
 
-                if (i == 35) {
+		if (i == 35) {
 		    i = 605;
 
 		    while (r1 < 50) {
-                        r1 = rand() % 110;
-                    }
+			r1 = rand() % 110;
+		    }
 
-                    m = rand() % 2;
+		    m = rand() % 2;
 
-                    if (m % 2 == 0)
-                        r1 = 1 * r1;
-                    else
+		    if (m % 2 == 0)
+			r1 = 1 * r1;
+		    else
 			r1 = -1 * r1;
-                }
+		}
 
-            } else
-                i--;
+	    } else
+		i--;
 
-            /*  2nd pillar  */
+	    /*  2nd pillar  */
 
-            if (j < 555) {
+	    if (j < 555) {
 
-                setfillstyle(SOLID_FILL, colorpil);
-                bar(j, 0, j + 50, 180 + r2);
-                setfillstyle(SOLID_FILL, colorpil);
-                bar(j - 5, 170 + r2, j + 55, 180 + r2);
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(j, 0, j + 50, 180 + r2);
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(j - 5, 170 + r2, j + 55, 180 + r2);
 
-                rectangle(j, 0, j + 50, 170 + r2);
+		rectangle(j, 0, j + 50, 170 + r2);
 
-                rectangle(j - 5, 170 + r2, j + 55, 180 + r2);
+		rectangle(j - 5, 170 + r2, j + 55, 180 + r2);
 
-                setfillstyle(SOLID_FILL, colorpil);
-                bar(j, 180 + r2 + 115, j + 50, 419);
-                setfillstyle(SOLID_FILL, colorpil);
-                bar(j - 5, 180 + r2 + 115, j + 55, 190 + r2 + 115);
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(j, 180 + r2 + 115, j + 50, 419);
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(j - 5, 180 + r2 + 115, j + 55, 190 + r2 + 115);
 
-                rectangle(j - 5, 180 + r2 + 115, j + 55, 190 + r2 + 115);
+		rectangle(j - 5, 180 + r2 + 115, j + 55, 190 + r2 + 115);
 
-                rectangle(j, 190 + r2 + 115, j + 50, 419);
+		rectangle(j, 190 + r2 + 115, j + 50, 419);
 
-                j--;
+		j--;
 
-                if (j == 35) {
-                    j = 605;
+		if (j == 35) {
+		    j = 605;
 
 		    while (r2 < 50) {
-                        r2 = rand() % 110;
-                    }
+			r2 = rand() % 110;
+		    }
 
-                    m = rand() % 2;
+		    m = rand() % 2;
 
-                    if (m % 2 == 0)
-                        r2 = 1 * r2;
-                    else
+		    if (m % 2 == 0)
+			r2 = 1 * r2;
+		    else
 			r2 = -1 * r2;
-                }
-            } else
-                j--;
+		}
+	    } else
+		j--;
 
-            /* 3rd pillar */
+	    /* 3rd pillar */
 
-            if (k < 555) {
+	    if (k < 555) {
 
-                setfillstyle(SOLID_FILL, colorpil);
-                bar(k, 0, k + 50, 180 + r3);
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(k, 0, k + 50, 180 + r3);
 		setfillstyle(SOLID_FILL, colorpil);
                 bar(k - 5, 170 + r3, k + 55, 180 + r3);
 
