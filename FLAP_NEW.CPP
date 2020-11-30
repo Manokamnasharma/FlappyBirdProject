@@ -16,17 +16,13 @@ typedef struct scor {
 }
 scor;
 
-void circ(x,y,r)
-{
-	  if (y<=0)
-	  {
-	    y*=(-1);
-	    y=y%480;
-	    y=480-y;
+void circ(int x, int y, int r) {
+	  if (y <= 0) {
+	    y *= (-1);
+	    y = y % 480;
+	    y = 480 - y;
 	  }
-
-	   circle(x,y,r);
-
+	   circle(x, y, r);
 }
 
 void pop(struct scor *stack)  {
@@ -46,7 +42,78 @@ void push(int score, struct scor * stack) {
     free(temp);
 }
 
+int pillar_randomess(int r) {
+	int m;
+	while (r < 50) {
+	    r = rand() % 110;
+	}
+	m = rand() % 2;
+	return m % 2 == 0 ? r : -r;
+}
 
+void make_fish(int h) {
+	    circle(325, 210 + h, 3);
+	    arc(300, 230 + h, 30, 150, 40);
+	    arc(300, 190 + h, 210, 330, 40);
+	    arc(284, 210 + h, 340, 20, 25);
+	    arc(279, 210 + h, 340, 20, 25);
+	    arc(289, 210 + h, 340, 20, 25);
+	    arc(240, 210 + h, 318, 45, 25);
+	    line(258, 193 + h, 258, 227 + h);
+	    setfillstyle(SOLID_FILL, GREEN);
+	    floodfill(325, 210 + h, WHITE);
+}
+
+int is_going_to_collide(int i, int r, int h) {
+	if ((i <= 334 && i >= 266) || ((i + 50) <= 334 && (i + 50) >= 266)) {
+		if ((190 + h) <= (180 + r) || (230 + h) >= (180 + r + 120))
+			return 1;
+	}
+	return 0;
+}
+
+void make_pillar(int i, int r, int colorpil) {
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(i, 0, i + 50, 180 + r);
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(i - 5, 170 + r, i + 55, 180 + r);
+
+		rectangle(i, 0, i + 50, 170 + r);
+
+		rectangle(i - 5, 170 + r, i + 55, 180 + r);
+
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(i, 180 + r + 120, i + 50, 419);
+		setfillstyle(SOLID_FILL, colorpil);
+		bar(i - 5, 180 + r + 120, i + 55, 190 + r + 120);
+
+		rectangle(i - 5, 180 + r + 120, i + 55, 190 + r + 120);
+
+		rectangle(i, 190 + r + 120, i + 50, 419);
+}
+
+void make_bubbles(int hb) {
+	setfillstyle(SOLID_FILL, WHITE);
+	circ(40, 250 + hb, 10);
+	circ(37, 203 + hb, 5);
+	circ(130, 120 + hb, 12);
+	circ(134, 200 + hb, 13);
+	circ(225, 160 + hb, 9);
+	circ(360, 200 + hb, 5);
+	circ(317, 150 + hb, 7);
+	circ(400, 120 + hb, 8);
+	circ(415, 160 + hb, 10);
+	circ(510, 120 + hb, 5);
+	circ(510, 200 + hb, 5);
+	circ(600, 160 + hb, 6);
+	circ(490, 470 + hb, 6);
+	circ(550, 420 + hb, 7);
+	circ(40, 400 + hb, 6);
+	circ(60, 450 + hb, 5);
+	circ(270, 455 + hb, 6);
+	circ(420, 400 + hb, 6);
+	circ(360, 448 + hb, 8);
+}
 void main() {
     int i, j; // coordinates
     int c = 0; // score counter
@@ -57,10 +124,8 @@ void main() {
     int hgt = 0;
     int color = 0;
     int colorpil = 4;
-
     int h, hb; /*   height and depth parameters */
     int l, k, m, r1, r2, r3;
-    int a1, a2, a3; /* base slab coordinates  */
     char msg[20];
     int score;
     int i1;
@@ -70,7 +135,7 @@ void main() {
     scor * stack, * temp2;
 
     int gd = DETECT, gm;
-    initgraph( & gd, & gm, "C:\\TurboC3\\BGI");
+    initgraph(&gd, &gm, "C:\\TurboC3\\BGI");
 
     cleardevice();
 
@@ -80,14 +145,12 @@ void main() {
     ht = 23;
     i = 605, j = 795, k = 985;
 
-    a1 = 0, a2 = 640, a3 = 1280;
-
     for (i1 = 0; i1 < 3; i1++) {
 
 	temp1 = (diff * ) malloc(sizeof(struct diff));
 	temp1 -> r = 0;
 	if (rd == NULL)
-	    rd = temp1;
+		rd = temp1;
 	else {
 	    temp1 -> next = rd;
 	    rd = temp1;
@@ -96,8 +159,7 @@ void main() {
 
     /*  GAME BEGINS   */
 
-    while (ch == 'y') /*   GAME  REPEAT   LOOOOOOP     */ {
-
+    while (ch == 'y') /*   GAME  REPEAT   LOOP  */ {
 	f = 1;
 	c = 0;
 	r1 = 0, r2 = 0, r3 = 0;
@@ -107,79 +169,19 @@ void main() {
 	ht = 23;
 	i = 605, j = 810, k = 1015;
 
-	a1 = 0, a2 = 640, a3 = 1280;
 
-	while (r1 < 50) /*   1st   pillar   randomness  */ {
-	    r1 = rand() % 110;
-	}
-
-	m = rand() % 2;
-
-	if (m % 2 == 0)
-	    r1 = 1 * r1;
-	else
-	    r1 = -1 * r1;
-
-	while (r2 < 50) /*   2nd  pillar randomness  */ {
-	    r2 = rand() % 110;
-	}
-
-	m = rand() % 2;
-
-	if (m % 2 == 0)
-	    r2 = 1 * r2;
-	else
-	    r2 = -1 * r2;
-
-	while (r3 < 50) /*  3rd  pillar  randomness   */ {
-	    r3 = rand() % 110;
-	}
-
-	m = rand() % 2;
-
-	if (m % 2 == 0)
-	    r3 = 1 * r3;
-	else
-	    r3 = -1 * r3;
-
-     color = 1;
-      //	color = rand() % 2; /*   background  and   pillar  color coding   */
-    //	color = color + 8;
-
-     //	if (color == 8) /*  if  background gray then pillar r green  */ /*   NIGHT */
-	    //colorpil = 2;
-
-     //	if (color == 9) /*  if  background is lightblue then pillars r  light green  */ /*   DAY   */
-	//    colorpil = 12;
+	r1 = pillar_randomess(r1);
+	r2 = pillar_randomess(r2);
+	r3 = pillar_randomess(r3);
+	color = 1;
 
 	setbkcolor(color);
 
 	/*   START   SCREEN   */
 
 	for (l = 0;; l++) {
-
-
-		setfillstyle(SOLID_FILL, WHITE);
-		circ(40, 250+hb, 10);
-		circ(37, 203+hb, 5);
-		circ(130, 120+hb, 12);
-		circ(134, 200+hb, 13);
-		circ(225, 160+hb, 9);
-		circ(360, 200+hb, 5);
-		circ(317, 150+hb, 7);
-		circ(400, 120+hb, 8);
-		circ(415, 160+hb, 10);
-		circ(510, 120+hb, 5);
-		circ(510, 200+hb, 5);
-		circ(600, 160+hb, 6);
-		circ(490, 470+hb, 6);
-		circ(550, 420+hb, 7);
-		circ(40, 400+hb, 6);
-		circ(60, 450+hb, 5);
-		circ(270, 455+hb, 6);
-		circ(420, 400+hb, 6);
-		circ(360, 448+hb, 8);
-		hb=hb-2;
+		make_bubbles(hb);
+		hb = hb - 2;
 
 	    if (f > 18)
 		f = 1;
@@ -193,50 +195,27 @@ void main() {
 	    if (hgt >= 20)
 		h++;
 
-	  //  ellipse(300, 210 + h, 0, 360, 25, 20); /*    bird  structure   */
-	  //  arc(325, 185 + h, 190, 270, 25); /*    eye    */
-	 //   ellipse(325, 210 + h, 0, 360, 6, 4); /*   beak    */
-	    // floodfill(300,240+h,4);  cannot be used to fill color , it fills the whole screen
-	    circle(325,210+h,3);
-	    arc(300, 230+h, 30, 150,40)   ;
-	    arc(300, 190+h, 210, 330, 40) ;
-	    arc(284, 210+h, 340,20,25);
-	    arc(279, 210+h, 340,20,25);
-	    arc(289, 210+h, 340,20,25);
-	    arc(240,210+h,318,45,25) ;
-	    line(258,193+h,258,227+h);
-	    setfillstyle(SOLID_FILL,GREEN);
-	    floodfill(325,210+h,WHITE);
-
+	    make_fish(h);
 
 	    if (f <= 9) {
 
-	    /*	arc(300, 185 + h, 180, 270, 25);  // flap  up
-		arc(275, 210 + h, 0, 90, 25);
-
-		 floodfill(287,227,WHITE);
-		floodfill(279,219,WHITE);	*/
-		line(300,210+h,298,203+h);
-		line(298,203+h,292,215+h);
-		line(292,215+h,300,210+h);
+		line(300, 210 + h, 298, 203 + h);
+		line(298, 203 + h, 292, 215 + h);
+		line(292, 215 + h, 300, 210 + h);
 
 	    }
 
-	    if (f > 9) /*    flap   down     */ {
-	     /*	arc(300, 235 + h, 90, 180, 25);
-		arc(275, 210 + h, 270, 0, 25);
-		/*   floodfill(287,252,WHITE);
-		floodfill(279,261,WHITE); */
-		line(300,210+h,287,202+h);
-		line(287,202+h,284,218+h);
-		line(284,218+h,300,210+h);
+	    if (f > 9) {
+		line(300, 210 + h, 287, 202 + h);
+		line(287, 202 + h, 284, 218 + h);
+		line(284, 218 + h, 300, 210 + h);
 	    }
 
 	    f++;
 	    hgt++;
 
 	    settextstyle(SANS_SERIF_FONT, HORIZ_DIR, 7);
-	    outtextxy(150, 20, "Fishy Fish");
+	    outtextxy(150, 20, "F Fish");
 
 	    settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
 	    outtextxy(490, 80, "C");
@@ -263,28 +242,7 @@ void main() {
 	f = 1;
 
 	for (l = 0;; l++) /*    the beginning of the game's loop  */ {
-
-	 setfillstyle(SOLID_FILL, WHITE);
-		circ(40, 250+hb, 10);
-		circ(37, 203+hb, 5);
-		circ(130, 120+hb, 12);
-		circ(134, 200+hb, 13);
-		circ(225, 160+hb, 9);
-		circ(360, 200+hb, 5);
-		circ(317, 150+hb, 7);
-		circ(400, 120+hb, 8);
-		circ(415, 160+hb, 10);
-		circ(510, 120+hb, 5);
-		circ(510, 200+hb, 5);
-		circ(600, 160+hb, 6);
-      /*	    if (a1 <= -639) /*   slash filled  slab  condition
-		a1 = 1280;
-
-	    if (a2 <= -639)
-		a2 = 1280;
-
-	    if (a3 <= -639)
-		a3 = 1280;   */
+	make_bubbles(hb);
 
 	    setfillstyle(SLASH_FILL,10);
 	    bar(0, 420, 640, 440);
@@ -292,35 +250,12 @@ void main() {
 	    setfillstyle(SOLID_FILL, 10); /*  base  yellow  ground   */
 	    bar(0, 440, 640, 480);
 
-	    a1--;
-	    a2--;
-	    a3--;
-
 	    if (f > 22)
 		f = 1;
 
-	/*    ellipse(300, 240+h, 0, 360, 25, 20);    bird  structure
-	    arc(325, 215 + h, 190, 270, 25);
-	    ellipse(325, 240 + h, 0, 360, 6, 4);
-	    /* floodfill(300,240+h,4);  */
-	    circle(325,210+h,3);
-	    arc(300, 230+h, 30, 150,40)   ;
-	    arc(300, 190+h, 210, 330, 40) ;
-	    arc(284, 210+h, 340,20,25);
-	    arc(279, 210+h, 340,20,25);
-	    arc(289, 210+h, 340,20,25);
-	    arc(240,210+h,318,45,25) ;
-	    line(258,193+h,258,227+h);
-	    setfillstyle(SOLID_FILL,GREEN);
-	    floodfill(325,210+h,WHITE);
+		make_fish(h);
 
 	    if (f <= 11) {
-
-	    /*	arc(300, 215 + h, 180, 270, 25);
-		arc(275, 240 + h, 0, 90, 25);
-
-		 floodfill(287,227,WHITE);
-		floodfill(279,219,WHITE);	*/
 		line(300,210+h,298,203+h);
 		line(298,203+h,292,215+h);
 		line(292,215+h,300,210+h);
@@ -328,10 +263,6 @@ void main() {
 	    }
 
 	    if (f > 11) {
-	      /*  arc(300, 265 + h, 90, 180, 25);
-		arc(275, 240 + h, 270, 0, 25);
-		  floodfill(287,252,WHITE);
-		floodfill(279,261,WHITE); */
 		line(300,210+h,287,202+h);
 		line(287,202+h,284,218+h);
 		line(284,218+h,300,210+h);
@@ -347,20 +278,14 @@ void main() {
 		break;
 	    }
 
-	    if ((i <= 334 && i >= 266) || ((i + 50) <= 334 && (i + 50) >= 266)) /* collision with 1st pillar top  or  base */ {
-		if ((190 + h) <= (180 + r1) || (230 + h) >= (180 + r1 + 120))
-		    break;
-	    }
+		if (is_going_to_collide(i, r1, h))
+			break;
 
-	    if ((j <= 334 && j >= 266) || ((j + 50) <= 334 && (j + 50) >= 266)) /* collision with 1st pillar top  or  base */ {
-		if ((190 + h) <= (180 + r2) || (230 + h) >= (180 + r2 + 120))
-		    break;
-	    }
+		if (is_going_to_collide(j, r2, h))
+			break;
 
-	    if ((k <= 334 && k >= 266) || ((k + 50) <= 334 && (k + 50) >= 266)) /* collision with 1st pillar top  or  base */ {
-		if ((190 + h) <= (180 + r3) || (230 + h) >= (180 + r3 + 120))
-		    break;
-	    }
+		if (is_going_to_collide(k, r3, h))
+			break;
 
 	    /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++                   */
 
@@ -406,81 +331,27 @@ void main() {
 
 	    if (i < 555) {
 
-		setfillstyle(SOLID_FILL, colorpil);
-		bar(i, 0, i + 50, 180 + r1);
-		setfillstyle(SOLID_FILL, colorpil);
-		bar(i - 5, 170 + r1, i + 55, 180 + r1);
-
-		rectangle(i, 0, i + 50, 170 + r1);
-
-		rectangle(i - 5, 170 + r1, i + 55, 180 + r1);
-
-		setfillstyle(SOLID_FILL, colorpil);
-		bar(i, 180 + r1 + 120, i + 50, 419);
-		setfillstyle(SOLID_FILL, colorpil);
-		bar(i - 5, 180 + r1 + 120, i + 55, 190 + r1 + 120);
-
-		rectangle(i - 5, 180 + r1 + 120, i + 55, 190 + r1 + 120);
-
-		rectangle(i, 190 + r1 + 120, i + 50, 419);
+		make_pillar(i, r1, colorpil);
 
 		i--;
 
 		if (i == 35) {
 		    i = 645;
+			r1 = pillar_randomess(r1);
 
-		    while (r1 < 50) {
-			r1 = rand() % 110;
-		    }
-
-		    m = rand() % 2;
-
-		    if (m % 2 == 0)
-			r1 = 1 * r1;
-		    else
-			r1 = -1 * r1;
 		}
-
-	    } else
+		} else
 		i--;
 
 	    /*  2nd pillar  */
 
 	    if (j < 555) {
-
-		setfillstyle(SOLID_FILL, colorpil);
-		bar(j, 0, j + 50, 180 + r2);
-		setfillstyle(SOLID_FILL, colorpil);
-		bar(j - 5, 170 + r2, j + 55, 180 + r2);
-
-		rectangle(j, 0, j + 50, 170 + r2);
-
-		rectangle(j - 5, 170 + r2, j + 55, 180 + r2);
-
-		setfillstyle(SOLID_FILL, colorpil);
-		bar(j, 180 + r2 + 120, j + 50, 419);
-		setfillstyle(SOLID_FILL, colorpil);
-		bar(j - 5, 180 + r2 + 120, j + 55, 190 + r2 + 120);
-
-		rectangle(j - 5, 180 + r2 + 120, j + 55, 190 + r2 + 120);
-
-		rectangle(j, 190 + r2 + 120, j + 50, 419);
-
+		make_pillar(j, r2, colorpil);
 		j--;
 
 		if (j == 35) {
 		    j = 645;
-
-		    while (r2 < 50) {
-			r2 = rand() % 110;
-		    }
-
-		    m = rand() % 2;
-
-		    if (m % 2 == 0)
-			r2 = 1 * r2;
-		    else
-			r2 = -1 * r2;
+			r2 = pillar_randomess(r2);
 		}
 	    } else
 		j--;
@@ -488,43 +359,16 @@ void main() {
 	    /* 3rd pillar */
 
 	    if (k < 555) {
-
-		setfillstyle(SOLID_FILL, colorpil);
-		bar(k, 0, k + 50, 180 + r3);
-		setfillstyle(SOLID_FILL, colorpil);
-                bar(k - 5, 170 + r3, k + 55, 180 + r3);
-
-                rectangle(k, 0, k + 50, 170 + r3);
-
-                rectangle(k - 5, 170 + r3, k + 55, 180 + r3);
-
-                setfillstyle(SOLID_FILL, colorpil);
-		bar(k, 180 + r3 + 120, k + 50, 419);
-		setfillstyle(SOLID_FILL, colorpil);
-		bar(k - 5, 180 + r3 + 120, k + 55, 190 + r3 + 120);
-
-		rectangle(k - 5, 180 + r3 + 120, k + 55, 190 + r3 + 120);
-
-		rectangle(k, 190 + r3 + 120, k + 50, 419);
+		make_pillar(k, r3, colorpil);
 
 		k--;
 
-                if (k == 35) {
+		if (k == 35) {
 		    k = 645;
-
-		    while (r3 < 50) {
-                        r3 = rand() % 110;
-                    }
-
-		    m = rand() % 2;
-
-		    if (m % 2 == 0)
-			r3 = 1 * r3;
-		    else
-			r3 = -1 * r3;
+			r3 = pillar_randomess(r3);
+	    }
 		}
-
-	    } else
+		else
 		k--;
 
 	    if (i == 300 || j == 300 || k == 300) {
@@ -573,7 +417,7 @@ void main() {
 
 	fclose(fp);
 	settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
-	    outtextxy(150, 250, "HIGHEST SCORE->");
+	outtextxy(150, 250, "HIGHEST SCORE->");
 
 
 	if (c > score) {
@@ -597,11 +441,11 @@ void main() {
 	settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
 	outtextxy(470, 250, msg);
 
-      /*	if (c > score) {
-	    fp = fopen("flappymaxscore.txt", "w");
+    if (c > score) {
+	    fp = fopen("flappymxscore.txt", "w");
 	    putw(c, fp);
 	    fclose(fp);
-	}    */
+	}
 
 	settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
 	outtextxy(40, 320, "PRESS 'Y' KEY TO PLAY THE GAME AGAIN");
@@ -621,6 +465,5 @@ void main() {
     }
 
     closegraph();
-
 
 }
